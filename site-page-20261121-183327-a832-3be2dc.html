@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tier1 test x08 Starter kit | $19 one-time</title>
+  <meta name="description" content="The Tier1 test x08 Starter kit: everything you need to get started, in one kit, for a single payment of $19.00. No subscription.">
+  <style>
+    /* ===== Design tokens ===== */
+    :root {
+      --ink: #10162b;
+      --ink-2: #1b2442;
+      --ink-3: #2a365e;
+      --paper: #f7f4ee;
+      --paper-2: #ece6da;
+      --amber: #f5b841;
+      --amber-deep: #8a5a00;
+      --text: #1d2233;
+      --text-muted: #4a5068;
+      --text-on-dark: #f3f1ea;
+      --text-on-dark-muted: #c3c7d6;
+
+      --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+      --fs-small: 0.875rem;
+      --fs-body: 1.0625rem;
+      --fs-lead: clamp(1.125rem, 1rem + 0.5vw, 1.3rem);
+      --fs-h3: clamp(1.15rem, 1.05rem + 0.4vw, 1.35rem);
+      --fs-h2: clamp(1.75rem, 1.3rem + 2vw, 2.75rem);
+      --fs-h1: clamp(2.25rem, 1.4rem + 4vw, 4.25rem);
+
+      --space-1: 0.5rem;
+      --space-2: 1rem;
+      --space-3: 1.5rem;
+      --space-4: 2rem;
+      --space-6: 3rem;
+      --space-8: 5rem;
+
+      --radius: 14px;
+      --max: 1120px;
+    }
+
+    /* ===== Base ===== */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: var(--font-sans);
+      font-size: var(--fs-body);
+      line-height: 1.6;
+      color: var(--text);
+      background: var(--paper);
+      overflow-x: hidden;
+    }
+    img, svg { max-width: 100%; display: block; }
+    h1, h2, h3 { line-height: 1.15; margin: 0 0 var(--space-2); letter-spacing: -0.01em; }
+    p { margin: 0 0 var(--space-2); }
+    a { color: inherit; }
+    :focus-visible {
+      outline: 3px solid var(--amber);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+    .container {
+      width: 100%;
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 var(--space-3);
+    }
+    .skip-link {
+      position: absolute;
+      left: var(--space-2);
+      top: -3rem;
+      background: var(--amber);
+      color: var(--ink);
+      padding: var(--space-1) var(--space-2);
+      font-weight: 700;
+      z-index: 10;
+    }
+    .skip-link:focus { top: var(--space-2); }
+
+    /* Tier tag: the recurring "layer label" motif */
+    .tier-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: var(--fs-small);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--amber-deep);
+      margin-bottom: var(--space-2);
+    }
+    .tier-tag::before {
+      content: "";
+      width: 1.75rem;
+      height: 0.5rem;
+      background:
+        linear-gradient(currentColor, currentColor) 0 0 / 100% 2px no-repeat,
+        linear-gradient(currentColor, currentColor) 0 50% / 70% 2px no-repeat,
+        linear-gradient(currentColor, currentColor) 0 100% / 40% 2px no-repeat;
+    }
+    .on-dark .tier-tag { color: var(--amber); }
+
+    /* ===== Buttons ===== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      padding: 0.95rem 1.6rem;
+      border-radius: 999px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    }
+    .btn-primary {
+      background: var(--amber);
+      color: var(--ink);
+      box-shadow: 0 6px 0 var(--amber-deep);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 0 var(--amber-deep); }
+    .btn-primary:active { transform: translateY(4px); box-shadow: 0 2px 0 var(--amber-deep); }
+    .btn-ghost {
+      color: var(--text-on-dark);
+      border: 2px solid var(--ink-3);
+    }
+    .btn-ghost:hover { border-color: var(--amber); }
+    .btn svg { width: 1.1em; height: 1.1em; }
+
+    /* ===== Header ===== */
+    .site-header {
+      background: var(--ink);
+      color: var(--text-on-dark);
+      border-bottom: 1px solid var(--ink-3);
+    }
+    .header-inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-2);
+      padding-top: var(--space-2);
+      padding-bottom: var(--space-2);
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-weight: 800;
+      text-decoration: none;
+    }
+    .brand svg { width: 28px; height: 28px; }
+    .site-nav ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-1) var(--space-3);
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      align-items: center;
+    }
+    .site-nav a {
+      text-decoration: none;
+      color: var(--text-on-dark-muted);
+      font-size: var(--fs-small);
+      font-weight: 600;
+    }
+    .site-nav a:hover { color: var(--text-on-dark); }
+    .site-nav .nav-buy {
+      color: var(--ink);
+      background: var(--amber);
+      padding: 0.45rem 1rem;
+      border-radius: 999px;
+    }
+    .site-nav .nav-buy:hover { color: var(--ink); }
+
+    /* ===== Hero ===== */
+    .hero {
+      background:
+        radial-gradient(60% 80% at 85% 20%, rgba(245, 184, 65, 0.16), transparent 60%),
+        linear-gradient(180deg, var(--ink) 0%, var(--ink-2) 100%);
+      color: var(--text-on-dark);
+      padding: var(--space-8) 0;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+      gap: var(--space-6);
+      align-items: center;
+    }
+    .hero h1 { font-size: var(--fs-h1); font-weight: 800; }
+    .hero h1 .accent { color: var(--amber); display: block; }
+    .hero .lead {
+      font-size: var(--fs-lead);
+      color: var(--text-on-dark-muted);
+      max-width: 34rem;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      margin: var(--space-4) 0 var(--space-3);
+    }
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-1) var(--space-3);
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      font-size: var(--fs-small);
+      color: var(--text-on-dark-muted);
+    }
+    .hero-meta li { display: inline-flex; align-items: center; gap: 0.4rem; }
+    .hero-meta svg { width: 1rem; height: 1rem; color: var(--amber); }
+    .hero-art { max-width: 460px; width: 100%; margin: 0 auto; }
+    .hero-art .layer { animation: float 6s ease-in-out infinite; }
+    .hero-art .layer-2 { animation-delay: -2s; }
+    .hero-art .layer-3 { animation-delay: -4s; }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    /* ===== Sections ===== */
+    .section { padding: var(--space-8) 0; }
+    .section-head { max-width: 40rem; margin-bottom: var(--space-6); }
+    .section-head h2 { font-size: var(--fs-h2); }
+    .section-head p { color: var(--text-muted); font-size: var(--fs-lead); }
+
+    /* ===== Features ===== */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+      gap: var(--space-3);
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .feature {
+      position: relative;
+      background: #fff;
+      border-radius: var(--radius);
+      padding: var(--space-4) var(--space-3) var(--space-3);
+      box-shadow: 0 1px 0 var(--paper-2), 0 10px 30px -18px rgba(16, 22, 43, 0.35);
+      border-top: 6px solid var(--ink);
+    }
+    /* stacked "tier" edges behind each card */
+    .feature::before,
+    .feature::after {
+      content: "";
+      position: absolute;
+      left: 8%;
+      right: 8%;
+      height: 6px;
+      border-radius: 6px 6px 0 0;
+      background: var(--ink-3);
+      top: -12px;
+      opacity: 0.55;
+    }
+    .feature::after { left: 16%; right: 16%; top: -18px; opacity: 0.3; }
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: var(--paper-2);
+      display: grid;
+      place-items: center;
+      margin-bottom: var(--space-2);
+      color: var(--ink);
+    }
+    .feature-icon svg { width: 26px; height: 26px; }
+    .feature h3 { font-size: var(--fs-h3); }
+    .feature p { color: var(--text-muted); margin: 0; }
+    .feature-num {
+      position: absolute;
+      top: var(--space-2);
+      right: var(--space-3);
+      font-family: var(--font-mono);
+      font-size: var(--fs-small);
+      color: var(--text-muted);
+    }
+
+    /* ===== How it works ===== */
+    .steps-section { background: var(--paper-2); }
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+      gap: var(--space-3);
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      counter-reset: step;
+    }
+    .steps li {
+      counter-increment: step;
+      padding-left: 3.5rem;
+      position: relative;
+    }
+    .steps li::before {
+      content: "0" counter(step);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 2.6rem;
+      height: 2.6rem;
+      border-radius: 50%;
+      background: var(--ink);
+      color: var(--amber);
+      font-family: var(--font-mono);
+      font-weight: 700;
+      display: grid;
+      place-items: center;
+      font-size: var(--fs-small);
+    }
+    .steps h3 { font-size: var(--fs-h3); margin-bottom: 0.35rem; }
+    .steps p { color: var(--text-muted); margin: 0; }
+
+    /* ===== Price ===== */
+    .price-section {
+      background: var(--ink);
+      color: var(--text-on-dark);
+    }
+    .price-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+      gap: var(--space-6);
+      align-items: center;
+    }
+    .price-section h2 { font-size: var(--fs-h2); }
+    .price-section .section-copy { color: var(--text-on-dark-muted); font-size: var(--fs-lead); }
+    .price-card {
+      position: relative;
+      background: var(--paper);
+      color: var(--text);
+      border-radius: var(--radius);
+      padding: var(--space-4);
+      margin-top: 18px;
+      box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.6);
+    }
+    .price-card::before,
+    .price-card::after {
+      content: "";
+      position: absolute;
+      height: 9px;
+      border-radius: 9px 9px 0 0;
+      background: var(--amber);
+      left: 6%;
+      right: 6%;
+      top: -9px;
+    }
+    .price-card::after { left: 12%; right: 12%; top: -18px; background: var(--amber-deep); }
+    .price-name {
+      font-family: var(--font-mono);
+      font-size: var(--fs-small);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-bottom: var(--space-1);
+    }
+    .price-amount {
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: var(--space-3);
+    }
+    .price-amount strong {
+      font-size: clamp(3rem, 2.2rem + 3vw, 4.25rem);
+      line-height: 1;
+      color: var(--ink);
+    }
+    .price-amount span { color: var(--text-muted); font-weight: 600; }
+    .price-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 var(--space-4);
+      display: grid;
+      gap: 0.6rem;
+    }
+    .price-list li { display: flex; gap: 0.6rem; align-items: flex-start; }
+    .price-list svg { flex: none; width: 1.25rem; height: 1.25rem; margin-top: 0.2rem; color: var(--amber-deep); }
+    .price-card .btn { width: 100%; }
+    .price-note {
+      margin: var(--space-2) 0 0;
+      font-size: var(--fs-small);
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    /* ===== FAQ ===== */
+    .faq-list { display: grid; gap: var(--space-2); max-width: 46rem; }
+    .faq-list details {
+      background: #fff;
+      border-radius: var(--radius);
+      padding: var(--space-2) var(--space-3);
+      border-left: 4px solid var(--ink);
+    }
+    .faq-list summary {
+      cursor: pointer;
+      font-weight: 700;
+      list-style-position: outside;
+    }
+    .faq-list details p { margin: var(--space-1) 0 0; color: var(--text-muted); }
+
+    /* ===== Final CTA ===== */
+    .cta {
+      text-align: center;
+      padding: var(--space-8) 0;
+      background:
+        repeating-linear-gradient(180deg, transparent 0 22px, rgba(16, 22, 43, 0.05) 22px 24px),
+        var(--paper-2);
+    }
+    .cta h2 { font-size: var(--fs-h2); }
+    .cta p { color: var(--text-muted); font-size: var(--fs-lead); max-width: 36rem; margin: 0 auto var(--space-4); }
+
+    /* ===== Footer ===== */
+    .site-footer {
+      background: var(--ink);
+      color: var(--text-on-dark-muted);
+      padding: var(--space-4) 0;
+      font-size: var(--fs-small);
+    }
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: var(--space-2);
+    }
+    .site-footer a { color: var(--text-on-dark); }
+
+    /* ===== Reduced motion ===== */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ===== Header ===== -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#top" aria-label="Tier1 test x08 Starter kit, back to top">
+        <svg viewBox="0 0 32 32" aria-hidden="true">
+          <rect x="4" y="5" width="24" height="5" rx="2" fill="#f5b841"/>
+          <rect x="7" y="13" width="18" height="5" rx="2" fill="#c3c7d6"/>
+          <rect x="10" y="21" width="12" height="5" rx="2" fill="#5b6894"/>
+        </svg>
+        <span>Tier1 x08</span>
+      </a>
+      <nav class="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#price">Price</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a class="nav-buy" href="https://buy.stripe.com/test_4gMeV5fCibplfelgX9b3q00">Buy now</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ===== Hero ===== -->
+    <section class="hero on-dark" id="top" aria-labelledby="hero-title">
+      <div class="container hero-grid">
+        <div>
+          <p class="tier-tag">Starter kit &middot; x08</p>
+          <h1 id="hero-title">Tier1 test x08 <span class="accent">Starter kit</span></h1>
+          <p class="lead">Start at the first tier with everything in one place. One kit, one payment of $19.00, and you are ready to begin.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="https://buy.stripe.com/test_4gMeV5fCibplfelgX9b3q00">
+              Buy now &mdash; $19
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <a class="btn btn-ghost" href="#features">See what&rsquo;s inside</a>
+          </div>
+          <ul class="hero-meta">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L19 7"/></svg>
+              One-time payment
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L19 7"/></svg>
+              No subscription
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L19 7"/></svg>
+              Secure checkout by Stripe
+            </li>
+          </ul>
+        </div>
+
+        <!-- Stacked-tier illustration -->
+        <svg class="hero-art" viewBox="0 0 400 360" role="img" aria-label="Illustration of three stacked layers forming the starter kit, with the top layer labelled x08">
+          <defs>
+            <linearGradient id="top-face" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#ffd27a"/>
+              <stop offset="1" stop-color="#f5b841"/>
+            </linearGradient>
+            <linearGradient id="mid-face" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#3a4776"/>
+              <stop offset="1" stop-color="#2a365e"/>
+            </linearGradient>
+          </defs>
+          <ellipse cx="200" cy="330" rx="150" ry="18" fill="#000" opacity="0.25"/>
+          <g class="layer layer-3">
+            <path d="M200 210 L340 260 L200 310 L60 260 Z" fill="#1f2a4d"/>
+            <path d="M60 260 L60 280 L200 330 L200 310 Z" fill="#151d38"/>
+            <path d="M340 260 L340 280 L200 330 L200 310 Z" fill="#192343"/>
+          </g>
+          <g class="layer layer-2">
+            <path d="M200 140 L340 190 L200 240 L60 190 Z" fill="url(#mid-face)"/>
+            <path d="M60 190 L60 210 L200 260 L200 240 Z" fill="#1f2a4d"/>
+            <path d="M340 190 L340 210 L200 260 L200 240 Z" fill="#243057"/>
+            <path d="M120 190 L200 162 L280 190" fill="none" stroke="#c3c7d6" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+          </g>
+          <g class="layer layer-1">
+            <path d="M200 60 L340 110 L200 160 L60 110 Z" fill="url(#top-face)"/>
+            <path d="M60 110 L60 132 L200 182 L200 160 Z" fill="#c98f1e"/>
+            <path d="M340 110 L340 132 L200 182 L200 160 Z" fill="#8a5a00"/>
+            <text x="200" y="118" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="30" font-weight="700" fill="#10162b" transform="rotate(0)">x08</text>
+          </g>
+          <circle cx="340" cy="50" r="6" fill="#f5b841"/>
+          <circle cx="60" cy="70" r="4" fill="#c3c7d6" opacity="0.7"/>
+        </svg>
+      </div>
+    </section>
+
+    <!-- ===== Features ===== -->
+    <section class="section" id="features" aria-labelledby="features-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="tier-tag">What you get</p>
+          <h2 id="features-title">Built to get you from zero to first tier</h2>
+          <p>The x08 Starter kit gathers the essentials so you can skip the hunting around and get straight to work.</p>
+        </div>
+        <ul class="feature-grid">
+          <li class="feature">
+            <span class="feature-num">01</span>
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>
+            </div>
+            <h3>Everything in one kit</h3>
+            <p>The starting pieces come together in a single package, so you are not stitching parts together from different places.</p>
+          </li>
+          <li class="feature">
+            <span class="feature-num">02</span>
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h6"/></svg>
+            </div>
+            <h3>Clear starting point</h3>
+            <p>Organised in layers, from the basics up, so you always know what to tackle first and what comes next.</p>
+          </li>
+          <li class="feature">
+            <span class="feature-num">03</span>
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            </div>
+            <h3>Ready right away</h3>
+            <p>Complete the checkout and you can start straight away. No waiting list, no setup call.</p>
+          </li>
+          <li class="feature">
+            <span class="feature-num">04</span>
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+            </div>
+            <h3>Pay once, keep it</h3>
+            <p>A single $19.00 payment. No subscription, no renewal reminders, nothing recurring on your card.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== How it works ===== -->
+    <section class="section steps-section" id="how" aria-labelledby="how-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="tier-tag">How it works</p>
+          <h2 id="how-title">Three steps, then you&rsquo;re building</h2>
+        </div>
+        <ol class="steps">
+          <li>
+            <h3>Choose the kit</h3>
+            <p>Click any &ldquo;Buy now&rdquo; button on this page to open the checkout.</p>
+          </li>
+          <li>
+            <h3>Pay securely</h3>
+            <p>Checkout is handled by Stripe. Enter your details and pay $19.00 once.</p>
+          </li>
+          <li>
+            <h3>Start at tier one</h3>
+            <p>Open your Starter kit and work through it layer by layer.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ===== Price ===== -->
+    <section class="section price-section on-dark" id="price" aria-labelledby="price-title">
+      <div class="container price-grid">
+        <div>
+          <p class="tier-tag">Price</p>
+          <h2 id="price-title">One price. One payment. That&rsquo;s it.</h2>
+          <p class="section-copy">No tiers of pricing to compare and no plans to cancel later. The Tier1 test x08 Starter kit costs $19.00, paid once.</p>
+        </div>
+        <div class="price-card">
+          <p class="price-name">Tier1 test x08 Starter kit</p>
+          <p class="price-amount"><strong>$19</strong><span>.00 USD &middot; one-time</span></p>
+          <ul class="price-list">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L19 7"/></svg>
+              The complete x08 Starter kit
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L19 7"/></svg>
+              Layered, start-from-the-basics structure
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L19 7"/></svg>
+              No subscription or recurring charges
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L19 7"/></svg>
+              Secure payment through Stripe
+            </li>
+          </ul>
+          <a class="btn btn-primary" href="https://buy.stripe.com/test_4gMeV5fCibplfelgX9b3q00">Buy now &mdash; $19.00</a>
+          <p class="price-note">You&rsquo;ll be taken to Stripe&rsquo;s secure checkout.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FAQ ===== -->
+    <section class="section" id="faq" aria-labelledby="faq-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="tier-tag">Questions</p>
+          <h2 id="faq-title">Before you buy</h2>
+        </div>
+        <div class="faq-list">
+          <details>
+            <summary>Is this a subscription?</summary>
+            <p>No. The Starter kit is a one-time purchase of $19.00. You will not be charged again.</p>
+          </details>
+          <details>
+            <summary>How do I pay?</summary>
+            <p>Every &ldquo;Buy now&rdquo; button opens a secure Stripe checkout page, where you can pay by card.</p>
+          </details>
+          <details>
+            <summary>Who is the Starter kit for?</summary>
+            <p>Anyone starting out at tier one who wants the essentials in one place instead of piecing them together.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Final call to action ===== -->
+    <section class="cta" aria-labelledby="cta-title">
+      <div class="container">
+        <p class="tier-tag">Ready?</p>
+        <h2 id="cta-title">Start your first tier today</h2>
+        <p>Get the Tier1 test x08 Starter kit for $19.00, one-time.</p>
+        <a class="btn btn-primary" href="https://buy.stripe.com/test_4gMeV5fCibplfelgX9b3q00">
+          Buy now
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>&copy; <span id="year">2025</span> Tier1 test x08 Starter kit</p>
+      <p><a href="#top">Back to top</a></p>
+    </div>
+  </footer>
+
+  <script>
+    // Footer year
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
